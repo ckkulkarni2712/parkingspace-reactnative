@@ -1,0 +1,78 @@
+927e97ed519c9b156b9351a62bdc806a
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+var _invariant = _interopRequireDefault(require("invariant"));
+var ChildListCollection = function () {
+  function ChildListCollection() {
+    (0, _classCallCheck2.default)(this, ChildListCollection);
+    this._cellKeyToChildren = new Map();
+    this._childrenToCellKey = new Map();
+  }
+  (0, _createClass2.default)(ChildListCollection, [{
+    key: "add",
+    value: function add(list, cellKey) {
+      var _this$_cellKeyToChild;
+      (0, _invariant.default)(!this._childrenToCellKey.has(list), 'Trying to add already present child list');
+      var cellLists = (_this$_cellKeyToChild = this._cellKeyToChildren.get(cellKey)) != null ? _this$_cellKeyToChild : new Set();
+      cellLists.add(list);
+      this._cellKeyToChildren.set(cellKey, cellLists);
+      this._childrenToCellKey.set(list, cellKey);
+    }
+  }, {
+    key: "remove",
+    value: function remove(list) {
+      var cellKey = this._childrenToCellKey.get(list);
+      (0, _invariant.default)(cellKey != null, 'Trying to remove non-present child list');
+      this._childrenToCellKey.delete(list);
+      var cellLists = this._cellKeyToChildren.get(cellKey);
+      (0, _invariant.default)(cellLists, '_cellKeyToChildren should contain cellKey');
+      cellLists.delete(list);
+      if (cellLists.size === 0) {
+        this._cellKeyToChildren.delete(cellKey);
+      }
+    }
+  }, {
+    key: "forEach",
+    value: function forEach(fn) {
+      for (var listSet of this._cellKeyToChildren.values()) {
+        for (var list of listSet) {
+          fn(list);
+        }
+      }
+    }
+  }, {
+    key: "forEachInCell",
+    value: function forEachInCell(cellKey, fn) {
+      var _this$_cellKeyToChild2;
+      var listSet = (_this$_cellKeyToChild2 = this._cellKeyToChildren.get(cellKey)) != null ? _this$_cellKeyToChild2 : [];
+      for (var list of listSet) {
+        fn(list);
+      }
+    }
+  }, {
+    key: "anyInCell",
+    value: function anyInCell(cellKey, fn) {
+      var _this$_cellKeyToChild3;
+      var listSet = (_this$_cellKeyToChild3 = this._cellKeyToChildren.get(cellKey)) != null ? _this$_cellKeyToChild3 : [];
+      for (var list of listSet) {
+        if (fn(list)) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }, {
+    key: "size",
+    value: function size() {
+      return this._childrenToCellKey.size;
+    }
+  }]);
+  return ChildListCollection;
+}();
+exports.default = ChildListCollection;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJDaGlsZExpc3RDb2xsZWN0aW9uIiwiX2NlbGxLZXlUb0NoaWxkcmVuIiwiTWFwIiwiX2NoaWxkcmVuVG9DZWxsS2V5IiwibGlzdCIsImNlbGxLZXkiLCJpbnZhcmlhbnQiLCJoYXMiLCJjZWxsTGlzdHMiLCJnZXQiLCJTZXQiLCJhZGQiLCJzZXQiLCJkZWxldGUiLCJzaXplIiwiZm4iLCJsaXN0U2V0IiwidmFsdWVzIl0sInNvdXJjZXMiOlsiQ2hpbGRMaXN0Q29sbGVjdGlvbi5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENvcHlyaWdodCAoYykgTWV0YSBQbGF0Zm9ybXMsIEluYy4gYW5kIGFmZmlsaWF0ZXMuXG4gKlxuICogVGhpcyBzb3VyY2UgY29kZSBpcyBsaWNlbnNlZCB1bmRlciB0aGUgTUlUIGxpY2Vuc2UgZm91bmQgaW4gdGhlXG4gKiBMSUNFTlNFIGZpbGUgaW4gdGhlIHJvb3QgZGlyZWN0b3J5IG9mIHRoaXMgc291cmNlIHRyZWUuXG4gKlxuICogQGZsb3cgc3RyaWN0XG4gKiBAZm9ybWF0XG4gKi9cblxuaW1wb3J0IGludmFyaWFudCBmcm9tICdpbnZhcmlhbnQnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBDaGlsZExpc3RDb2xsZWN0aW9uPFRMaXN0PiB7XG4gIF9jZWxsS2V5VG9DaGlsZHJlbjogTWFwPHN0cmluZywgU2V0PFRMaXN0Pj4gPSBuZXcgTWFwKCk7XG4gIF9jaGlsZHJlblRvQ2VsbEtleTogTWFwPFRMaXN0LCBzdHJpbmc+ID0gbmV3IE1hcCgpO1xuXG4gIGFkZChsaXN0OiBUTGlzdCwgY2VsbEtleTogc3RyaW5nKTogdm9pZCB7XG4gICAgaW52YXJpYW50KFxuICAgICAgIXRoaXMuX2NoaWxkcmVuVG9DZWxsS2V5LmhhcyhsaXN0KSxcbiAgICAgICdUcnlpbmcgdG8gYWRkIGFscmVhZHkgcHJlc2VudCBjaGlsZCBsaXN0JyxcbiAgICApO1xuXG4gICAgY29uc3QgY2VsbExpc3RzID0gdGhpcy5fY2VsbEtleVRvQ2hpbGRyZW4uZ2V0KGNlbGxLZXkpID8/IG5ldyBTZXQoKTtcbiAgICBjZWxsTGlzdHMuYWRkKGxpc3QpO1xuICAgIHRoaXMuX2NlbGxLZXlUb0NoaWxkcmVuLnNldChjZWxsS2V5LCBjZWxsTGlzdHMpO1xuXG4gICAgdGhpcy5fY2hpbGRyZW5Ub0NlbGxLZXkuc2V0KGxpc3QsIGNlbGxLZXkpO1xuICB9XG5cbiAgcmVtb3ZlKGxpc3Q6IFRMaXN0KTogdm9pZCB7XG4gICAgY29uc3QgY2VsbEtleSA9IHRoaXMuX2NoaWxkcmVuVG9DZWxsS2V5LmdldChsaXN0KTtcbiAgICBpbnZhcmlhbnQoY2VsbEtleSAhPSBudWxsLCAnVHJ5aW5nIHRvIHJlbW92ZSBub24tcHJlc2VudCBjaGlsZCBsaXN0Jyk7XG4gICAgdGhpcy5fY2hpbGRyZW5Ub0NlbGxLZXkuZGVsZXRlKGxpc3QpO1xuXG4gICAgY29uc3QgY2VsbExpc3RzID0gdGhpcy5fY2VsbEtleVRvQ2hpbGRyZW4uZ2V0KGNlbGxLZXkpO1xuICAgIGludmFyaWFudChjZWxsTGlzdHMsICdfY2VsbEtleVRvQ2hpbGRyZW4gc2hvdWxkIGNvbnRhaW4gY2VsbEtleScpO1xuICAgIGNlbGxMaXN0cy5kZWxldGUobGlzdCk7XG5cbiAgICBpZiAoY2VsbExpc3RzLnNpemUgPT09IDApIHtcbiAgICAgIHRoaXMuX2NlbGxLZXlUb0NoaWxkcmVuLmRlbGV0ZShjZWxsS2V5KTtcbiAgICB9XG4gIH1cblxuICBmb3JFYWNoKGZuOiBUTGlzdCA9PiB2b2lkKTogdm9pZCB7XG4gICAgZm9yIChjb25zdCBsaXN0U2V0IG9mIHRoaXMuX2NlbGxLZXlUb0NoaWxkcmVuLnZhbHVlcygpKSB7XG4gICAgICBmb3IgKGNvbnN0IGxpc3Qgb2YgbGlzdFNldCkge1xuICAgICAgICBmbihsaXN0KTtcbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICBmb3JFYWNoSW5DZWxsKGNlbGxLZXk6IHN0cmluZywgZm46IFRMaXN0ID0+IHZvaWQpOiB2b2lkIHtcbiAgICBjb25zdCBsaXN0U2V0ID0gdGhpcy5fY2VsbEtleVRvQ2hpbGRyZW4uZ2V0KGNlbGxLZXkpID8/IFtdO1xuICAgIGZvciAoY29uc3QgbGlzdCBvZiBsaXN0U2V0KSB7XG4gICAgICBmbihsaXN0KTtcbiAgICB9XG4gIH1cblxuICBhbnlJbkNlbGwoY2VsbEtleTogc3RyaW5nLCBmbjogVExpc3QgPT4gYm9vbGVhbik6IGJvb2xlYW4ge1xuICAgIGNvbnN0IGxpc3RTZXQgPSB0aGlzLl9jZWxsS2V5VG9DaGlsZHJlbi5nZXQoY2VsbEtleSkgPz8gW107XG4gICAgZm9yIChjb25zdCBsaXN0IG9mIGxpc3RTZXQpIHtcbiAgICAgIGlmIChmbihsaXN0KSkge1xuICAgICAgICByZXR1cm4gdHJ1ZTtcbiAgICAgIH1cbiAgICB9XG4gICAgcmV0dXJuIGZhbHNlO1xuICB9XG5cbiAgc2l6ZSgpOiBudW1iZXIge1xuICAgIHJldHVybiB0aGlzLl9jaGlsZHJlblRvQ2VsbEtleS5zaXplO1xuICB9XG59XG4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFVQTtBQUFrQyxJQUViQSxtQkFBbUI7RUFBQTtJQUFBO0lBQUEsS0FDdENDLGtCQUFrQixHQUE0QixJQUFJQyxHQUFHLEVBQUU7SUFBQSxLQUN2REMsa0JBQWtCLEdBQXVCLElBQUlELEdBQUcsRUFBRTtFQUFBO0VBQUE7SUFBQTtJQUFBLE9BRWxELGFBQUlFLElBQVcsRUFBRUMsT0FBZSxFQUFRO01BQUE7TUFDdEMsSUFBQUMsa0JBQVMsRUFDUCxDQUFDLElBQUksQ0FBQ0gsa0JBQWtCLENBQUNJLEdBQUcsQ0FBQ0gsSUFBSSxDQUFDLEVBQ2xDLDBDQUEwQyxDQUMzQztNQUVELElBQU1JLFNBQVMsNEJBQUcsSUFBSSxDQUFDUCxrQkFBa0IsQ0FBQ1EsR0FBRyxDQUFDSixPQUFPLENBQUMsb0NBQUksSUFBSUssR0FBRyxFQUFFO01BQ25FRixTQUFTLENBQUNHLEdBQUcsQ0FBQ1AsSUFBSSxDQUFDO01BQ25CLElBQUksQ0FBQ0gsa0JBQWtCLENBQUNXLEdBQUcsQ0FBQ1AsT0FBTyxFQUFFRyxTQUFTLENBQUM7TUFFL0MsSUFBSSxDQUFDTCxrQkFBa0IsQ0FBQ1MsR0FBRyxDQUFDUixJQUFJLEVBQUVDLE9BQU8sQ0FBQztJQUM1QztFQUFDO0lBQUE7SUFBQSxPQUVELGdCQUFPRCxJQUFXLEVBQVE7TUFDeEIsSUFBTUMsT0FBTyxHQUFHLElBQUksQ0FBQ0Ysa0JBQWtCLENBQUNNLEdBQUcsQ0FBQ0wsSUFBSSxDQUFDO01BQ2pELElBQUFFLGtCQUFTLEVBQUNELE9BQU8sSUFBSSxJQUFJLEVBQUUseUNBQXlDLENBQUM7TUFDckUsSUFBSSxDQUFDRixrQkFBa0IsQ0FBQ1UsTUFBTSxDQUFDVCxJQUFJLENBQUM7TUFFcEMsSUFBTUksU0FBUyxHQUFHLElBQUksQ0FBQ1Asa0JBQWtCLENBQUNRLEdBQUcsQ0FBQ0osT0FBTyxDQUFDO01BQ3RELElBQUFDLGtCQUFTLEVBQUNFLFNBQVMsRUFBRSwyQ0FBMkMsQ0FBQztNQUNqRUEsU0FBUyxDQUFDSyxNQUFNLENBQUNULElBQUksQ0FBQztNQUV0QixJQUFJSSxTQUFTLENBQUNNLElBQUksS0FBSyxDQUFDLEVBQUU7UUFDeEIsSUFBSSxDQUFDYixrQkFBa0IsQ0FBQ1ksTUFBTSxDQUFDUixPQUFPLENBQUM7TUFDekM7SUFDRjtFQUFDO0lBQUE7SUFBQSxPQUVELGlCQUFRVSxFQUFpQixFQUFRO01BQy9CLEtBQUssSUFBTUMsT0FBTyxJQUFJLElBQUksQ0FBQ2Ysa0JBQWtCLENBQUNnQixNQUFNLEVBQUUsRUFBRTtRQUN0RCxLQUFLLElBQU1iLElBQUksSUFBSVksT0FBTyxFQUFFO1VBQzFCRCxFQUFFLENBQUNYLElBQUksQ0FBQztRQUNWO01BQ0Y7SUFDRjtFQUFDO0lBQUE7SUFBQSxPQUVELHVCQUFjQyxPQUFlLEVBQUVVLEVBQWlCLEVBQVE7TUFBQTtNQUN0RCxJQUFNQyxPQUFPLDZCQUFHLElBQUksQ0FBQ2Ysa0JBQWtCLENBQUNRLEdBQUcsQ0FBQ0osT0FBTyxDQUFDLHFDQUFJLEVBQUU7TUFDMUQsS0FBSyxJQUFNRCxJQUFJLElBQUlZLE9BQU8sRUFBRTtRQUMxQkQsRUFBRSxDQUFDWCxJQUFJLENBQUM7TUFDVjtJQUNGO0VBQUM7SUFBQTtJQUFBLE9BRUQsbUJBQVVDLE9BQWUsRUFBRVUsRUFBb0IsRUFBVztNQUFBO01BQ3hELElBQU1DLE9BQU8sNkJBQUcsSUFBSSxDQUFDZixrQkFBa0IsQ0FBQ1EsR0FBRyxDQUFDSixPQUFPLENBQUMscUNBQUksRUFBRTtNQUMxRCxLQUFLLElBQU1ELElBQUksSUFBSVksT0FBTyxFQUFFO1FBQzFCLElBQUlELEVBQUUsQ0FBQ1gsSUFBSSxDQUFDLEVBQUU7VUFDWixPQUFPLElBQUk7UUFDYjtNQUNGO01BQ0EsT0FBTyxLQUFLO0lBQ2Q7RUFBQztJQUFBO0lBQUEsT0FFRCxnQkFBZTtNQUNiLE9BQU8sSUFBSSxDQUFDRCxrQkFBa0IsQ0FBQ1csSUFBSTtJQUNyQztFQUFDO0VBQUE7QUFBQTtBQUFBIn0=

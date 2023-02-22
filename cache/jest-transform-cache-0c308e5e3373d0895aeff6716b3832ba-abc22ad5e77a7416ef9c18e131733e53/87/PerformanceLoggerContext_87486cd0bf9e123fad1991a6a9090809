@@ -1,0 +1,21 @@
+aabecb7c4081347d246ff36c884fd939
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+exports.usePerformanceLogger = usePerformanceLogger;
+var _GlobalPerformanceLogger = _interopRequireDefault(require("./GlobalPerformanceLogger"));
+var React = _interopRequireWildcard(require("react"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var PerformanceLoggerContext = React.createContext(_GlobalPerformanceLogger.default);
+if (__DEV__) {
+  PerformanceLoggerContext.displayName = 'PerformanceLoggerContext';
+}
+function usePerformanceLogger() {
+  return (0, React.useContext)(PerformanceLoggerContext);
+}
+var _default = PerformanceLoggerContext;
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJQZXJmb3JtYW5jZUxvZ2dlckNvbnRleHQiLCJSZWFjdCIsImNyZWF0ZUNvbnRleHQiLCJHbG9iYWxQZXJmb3JtYW5jZUxvZ2dlciIsIl9fREVWX18iLCJkaXNwbGF5TmFtZSIsInVzZVBlcmZvcm1hbmNlTG9nZ2VyIiwidXNlQ29udGV4dCJdLCJzb3VyY2VzIjpbIlBlcmZvcm1hbmNlTG9nZ2VyQ29udGV4dC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENvcHlyaWdodCAoYykgTWV0YSBQbGF0Zm9ybXMsIEluYy4gYW5kIGFmZmlsaWF0ZXMuXG4gKlxuICogVGhpcyBzb3VyY2UgY29kZSBpcyBsaWNlbnNlZCB1bmRlciB0aGUgTUlUIGxpY2Vuc2UgZm91bmQgaW4gdGhlXG4gKiBMSUNFTlNFIGZpbGUgaW4gdGhlIHJvb3QgZGlyZWN0b3J5IG9mIHRoaXMgc291cmNlIHRyZWUuXG4gKlxuICogQGZsb3cgc3RyaWN0XG4gKiBAZm9ybWF0XG4gKi9cblxuaW1wb3J0IHR5cGUge0lQZXJmb3JtYW5jZUxvZ2dlcn0gZnJvbSAnLi9jcmVhdGVQZXJmb3JtYW5jZUxvZ2dlcic7XG5cbmltcG9ydCBHbG9iYWxQZXJmb3JtYW5jZUxvZ2dlciBmcm9tICcuL0dsb2JhbFBlcmZvcm1hbmNlTG9nZ2VyJztcbmltcG9ydCAqIGFzIFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7dXNlQ29udGV4dH0gZnJvbSAncmVhY3QnO1xuXG4vKipcbiAqIFRoaXMgaXMgYSBSZWFjdCBDb250ZXh0IHRoYXQgcHJvdmlkZXMgYSBzY29wZWQgaW5zdGFuY2Ugb2YgSVBlcmZvcm1hbmNlTG9nZ2VyLlxuICogV2Ugd3JhcCBldmVyeSA8QXBwQ29udGFpbmVyIC8+IHdpdGggYSBQcm92aWRlciBmb3IgdGhpcyBjb250ZXh0IHNvIHRoZSBsb2dnZXJcbiAqIHNob3VsZCBiZSBhdmFpbGFibGUgaW4gZXZlcnkgY29tcG9uZW50LlxuICogU2VlIFJlYWN0IGRvY3MgYWJvdXQgdXNpbmcgQ29udGV4dDogaHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2NvbnRleHQuaHRtbFxuICovXG5jb25zdCBQZXJmb3JtYW5jZUxvZ2dlckNvbnRleHQ6IFJlYWN0LkNvbnRleHQ8SVBlcmZvcm1hbmNlTG9nZ2VyPiA9XG4gIFJlYWN0LmNyZWF0ZUNvbnRleHQoR2xvYmFsUGVyZm9ybWFuY2VMb2dnZXIpO1xuaWYgKF9fREVWX18pIHtcbiAgUGVyZm9ybWFuY2VMb2dnZXJDb250ZXh0LmRpc3BsYXlOYW1lID0gJ1BlcmZvcm1hbmNlTG9nZ2VyQ29udGV4dCc7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiB1c2VQZXJmb3JtYW5jZUxvZ2dlcigpOiBJUGVyZm9ybWFuY2VMb2dnZXIge1xuICByZXR1cm4gdXNlQ29udGV4dChQZXJmb3JtYW5jZUxvZ2dlckNvbnRleHQpO1xufVxuXG5leHBvcnQgZGVmYXVsdCBQZXJmb3JtYW5jZUxvZ2dlckNvbnRleHQ7XG4iXSwibWFwcGluZ3MiOiI7Ozs7OztBQVlBO0FBQ0E7QUFBK0I7QUFBQTtBQVMvQixJQUFNQSx3QkFBMkQsR0FDL0RDLEtBQUssQ0FBQ0MsYUFBYSxDQUFDQyxnQ0FBdUIsQ0FBQztBQUM5QyxJQUFJQyxPQUFPLEVBQUU7RUFDWEosd0JBQXdCLENBQUNLLFdBQVcsR0FBRywwQkFBMEI7QUFDbkU7QUFFTyxTQUFTQyxvQkFBb0IsR0FBdUI7RUFDekQsT0FBTyxJQUFBQyxnQkFBVSxFQUFDUCx3QkFBd0IsQ0FBQztBQUM3QztBQUFDLGVBRWNBLHdCQUF3QjtBQUFBIn0=
