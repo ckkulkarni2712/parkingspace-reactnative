@@ -1,0 +1,59 @@
+6a40657b4f9bea9767e4dfb2df82baeb
+"use strict";
+
+var __extends = this && this.__extends || function () {
+  var _extendStatics = function extendStatics(d, b) {
+    _extendStatics = Object.setPrototypeOf || {
+      __proto__: []
+    } instanceof Array && function (d, b) {
+      d.__proto__ = b;
+    } || function (d, b) {
+      for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+    return _extendStatics(d, b);
+  };
+  return function (d, b) {
+    _extendStatics(d, b);
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+}();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var stream_1 = require("stream");
+var protobufjs_1 = require("protobufjs");
+var BinaryToMessageStream = function (_super) {
+  __extends(BinaryToMessageStream, _super);
+  function BinaryToMessageStream(decodeDelimited) {
+    var _this = _super.call(this, {
+      objectMode: true
+    }) || this;
+    _this.decodeDelimited = decodeDelimited;
+    _this.buffer = Buffer.alloc(0);
+    return _this;
+  }
+  BinaryToMessageStream.prototype._transform = function (chunk, encoding, callback) {
+    this.buffer = Buffer.concat([this.buffer, chunk]);
+    while (true) {
+      try {
+        var reader = protobufjs_1.Reader.create(this.buffer);
+        var message = this.decodeDelimited(reader);
+        this.push(message);
+        this.buffer = this.buffer.slice(reader.pos);
+      } catch (err) {
+        if (err instanceof RangeError) {
+          break;
+        } else {
+          throw err;
+        }
+      }
+    }
+    callback();
+  };
+  return BinaryToMessageStream;
+}(stream_1.Transform);
+exports.default = BinaryToMessageStream;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7QUFDQTtBQUtBO0VBQXNEQTtFQUdwRCwrQkFDbUJDLGVBQW1EO0lBRHRFLFlBR0VDLGtCQUFNO01BQUVDLFVBQVUsRUFBRTtJQUFJLENBQUUsQ0FBQztJQUZWQyxxQkFBZSxHQUFmSCxlQUFlO0lBSDFCRyxZQUFNLEdBQUdDLE1BQU0sQ0FBQ0MsS0FBSyxDQUFDLENBQUMsQ0FBQzs7RUFNaEM7RUFFT0MsMENBQVUsR0FBakIsVUFBa0JDLEtBQVUsRUFBRUMsUUFBZ0IsRUFBRUMsUUFBMkI7SUFDekUsSUFBSSxDQUFDQyxNQUFNLEdBQUdOLE1BQU0sQ0FBQ08sTUFBTSxDQUFDLENBQUMsSUFBSSxDQUFDRCxNQUFNLEVBQUVILEtBQUssQ0FBQyxDQUFDO0lBRWpELE9BQU8sSUFBSSxFQUFFO01BQ1gsSUFBSTtRQUNGLElBQU1LLE1BQU0sR0FBR0MsbUJBQU0sQ0FBQ0MsTUFBTSxDQUFDLElBQUksQ0FBQ0osTUFBTSxDQUFDO1FBQ3pDLElBQU1LLE9BQU8sR0FBRyxJQUFJLENBQUNmLGVBQWUsQ0FBQ1ksTUFBTSxDQUFDO1FBQzVDLElBQUksQ0FBQ0ksSUFBSSxDQUFDRCxPQUFPLENBQUM7UUFDbEIsSUFBSSxDQUFDTCxNQUFNLEdBQUcsSUFBSSxDQUFDQSxNQUFNLENBQUNPLEtBQUssQ0FBQ0wsTUFBTSxDQUFDTSxHQUFHLENBQUM7T0FDNUMsQ0FBQyxPQUFPQyxHQUFHLEVBQUU7UUFDWixJQUFJQSxHQUFHLFlBQVlDLFVBQVUsRUFBRTtVQUU3QjtTQUNELE1BQU07VUFDTCxNQUFNRCxHQUFHOzs7O0lBSWZWLFFBQVEsRUFBRTtFQUNaLENBQUM7RUFDSCw0QkFBQztBQUFELENBQUMsQ0E3QnFEWSxrQkFBUyIsIm5hbWVzIjpbIl9fZXh0ZW5kcyIsImRlY29kZURlbGltaXRlZCIsIl9zdXBlciIsIm9iamVjdE1vZGUiLCJfdGhpcyIsIkJ1ZmZlciIsImFsbG9jIiwiQmluYXJ5VG9NZXNzYWdlU3RyZWFtIiwiY2h1bmsiLCJlbmNvZGluZyIsImNhbGxiYWNrIiwiYnVmZmVyIiwiY29uY2F0IiwicmVhZGVyIiwicHJvdG9idWZqc18xIiwiY3JlYXRlIiwibWVzc2FnZSIsInB1c2giLCJzbGljZSIsInBvcyIsImVyciIsIlJhbmdlRXJyb3IiLCJzdHJlYW1fMSJdLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvQmluYXJ5VG9NZXNzYWdlU3RyZWFtLnRzIl0sInNvdXJjZXNDb250ZW50IjpbbnVsbF19

@@ -1,0 +1,12 @@
+3a64f734dce9be31eb7cc4460178d97c
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var regexAstralSymbols = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+function countSymbols(s) {
+  return s.replace(regexAstralSymbols, '_').length;
+}
+exports.default = countSymbols;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7QUFDQSxJQUFNQSxrQkFBa0IsR0FBRyxpQ0FBaUM7QUFFNUQsU0FBd0JDLFlBQVksQ0FBQ0MsQ0FBUztFQUM1QyxPQUFPQSxDQUFDLENBQUNDLE9BQU8sQ0FBQ0gsa0JBQWtCLEVBQUUsR0FBRyxDQUFDLENBQUNJLE1BQU07QUFDbEQ7QUFGQUMiLCJuYW1lcyI6WyJyZWdleEFzdHJhbFN5bWJvbHMiLCJjb3VudFN5bWJvbHMiLCJzIiwicmVwbGFjZSIsImxlbmd0aCIsImV4cG9ydHMiXSwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NvdW50U3ltYm9scy50cyJdLCJzb3VyY2VzQ29udGVudCI6W251bGxdfQ==

@@ -1,0 +1,14 @@
+05544ad82b26083c4471d1982591b855
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Gherkin_1 = __importDefault(require("./Gherkin"));
+exports.default = Gherkin_1.default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUFBO0FBR0FBLGtCQUFlQyxpQkFBTyIsIm5hbWVzIjpbImV4cG9ydHMiLCJHaGVya2luXzEiXSwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2luZGV4LnRzIl0sInNvdXJjZXNDb250ZW50IjpbbnVsbF19

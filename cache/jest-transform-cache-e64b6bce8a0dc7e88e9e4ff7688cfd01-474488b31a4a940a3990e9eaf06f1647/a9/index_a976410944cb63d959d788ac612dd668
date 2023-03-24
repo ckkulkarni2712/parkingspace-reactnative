@@ -1,0 +1,5 @@
+92ef0d1bb5bf1a87c118be1ecb0641ec
+'use strict';
+
+module.exports = require('./cjs/react-shallow-renderer.js');
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJtb2R1bGUiLCJleHBvcnRzIiwicmVxdWlyZSJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbIid1c2Ugc3RyaWN0JztcblxubW9kdWxlLmV4cG9ydHMgPSByZXF1aXJlKCcuL2Nqcy9yZWFjdC1zaGFsbG93LXJlbmRlcmVyLmpzJyk7XG4iXSwibWFwcGluZ3MiOiJBQUFBLFlBQVk7O0FBRVpBLE1BQU0sQ0FBQ0MsT0FBTyxHQUFHQyxPQUFPLENBQUMsaUNBQWlDLENBQUMifQ==

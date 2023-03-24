@@ -1,0 +1,82 @@
+e224a1f3ca9fa1f96d5e126238f3cce4
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateCodeWithSeparateFunctionsFromFeature = exports.generateCodeFromFeature = exports.ObjectTypeEnum = void 0;
+var scenario_generation_1 = require("./scenario-generation");
+var step_generation_1 = require("./step-generation");
+var ObjectTypeEnum;
+(function (ObjectTypeEnum) {
+  ObjectTypeEnum[ObjectTypeEnum["scenario"] = 0] = "scenario";
+  ObjectTypeEnum[ObjectTypeEnum["scenarioOutline"] = 1] = "scenarioOutline";
+  ObjectTypeEnum[ObjectTypeEnum["step"] = 2] = "step";
+})(ObjectTypeEnum = exports.ObjectTypeEnum || (exports.ObjectTypeEnum = {}));
+var findObjectByLineNumber = function findObjectByLineNumber(feature, lineNumber) {
+  var found = null;
+  var type = ObjectTypeEnum.scenario;
+  feature.scenarioOutlines.forEach(function (scenarioOutline) {
+    if (scenarioOutline.lineNumber === lineNumber) {
+      found = scenarioOutline;
+      type = ObjectTypeEnum.scenarioOutline;
+    }
+    scenarioOutline.steps.forEach(function (step, index) {
+      if (step.lineNumber === lineNumber) {
+        found = {
+          steps: scenarioOutline.steps,
+          index: index
+        };
+        type = ObjectTypeEnum.step;
+      }
+    });
+  });
+  feature.scenarios.forEach(function (scenario) {
+    if (scenario.lineNumber === lineNumber) {
+      found = scenario;
+      type = ObjectTypeEnum.scenario;
+    }
+    scenario.steps.forEach(function (step, index) {
+      if (step.lineNumber === lineNumber) {
+        found = {
+          steps: scenario.steps,
+          index: index
+        };
+        type = ObjectTypeEnum.step;
+      }
+    });
+  });
+  return found ? {
+    object: found,
+    type: type
+  } : null;
+};
+exports.generateCodeFromFeature = function (feature, lineNumber) {
+  var objectAtLine = findObjectByLineNumber(feature, lineNumber);
+  if (objectAtLine === null) {
+    return null;
+  } else {
+    switch (objectAtLine.type) {
+      case ObjectTypeEnum.scenario:
+      case ObjectTypeEnum.scenarioOutline:
+        return scenario_generation_1.generateScenarioCode(objectAtLine.object);
+      case ObjectTypeEnum.step:
+        return step_generation_1.generateStepCode(objectAtLine.object.steps, objectAtLine.object.index, false);
+    }
+  }
+};
+exports.generateCodeWithSeparateFunctionsFromFeature = function (feature, lineNumber) {
+  var objectAtLine = findObjectByLineNumber(feature, lineNumber);
+  if (objectAtLine === null) {
+    return null;
+  } else {
+    switch (objectAtLine.type) {
+      case ObjectTypeEnum.scenario:
+      case ObjectTypeEnum.scenarioOutline:
+        return scenario_generation_1.generateScenarioCodeWithSeparateStepFunctions(objectAtLine.object);
+      case ObjectTypeEnum.step:
+        return step_generation_1.generateStepCode(objectAtLine.object.steps, objectAtLine.object.index, true);
+    }
+  }
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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TyxRQUFRO01BQzVCLEtBQUtQLGNBQWMsQ0FBQ1UsZUFBZTtRQUMvQixPQUFPTyxtRUFBNkMsQ0FBQ0QsWUFBWSxDQUFDRCxNQUFNLENBQUM7TUFDN0UsS0FBS2YsY0FBYyxDQUFDWSxJQUFJO1FBQ3BCLE9BQU9NLGtDQUFnQixDQUFDRixZQUFZLENBQUNELE1BQU0sQ0FBQ0osS0FBSyxFQUFFSyxZQUFZLENBQUNELE1BQU0sQ0FBQ0YsS0FBSyxFQUFFLElBQUksQ0FBQztJQUFDOztBQUdwRyxDQUFDIiwibmFtZXMiOlsiT2JqZWN0VHlwZUVudW0iLCJleHBvcnRzIiwiZmluZE9iamVjdEJ5TGluZU51bWJlciIsImZlYXR1cmUiLCJsaW5lTnVtYmVyIiwiZm91bmQiLCJ0eXBlIiwic2NlbmFyaW8iLCJzY2VuYXJpb091dGxpbmVzIiwiZm9yRWFjaCIsInNjZW5hcmlvT3V0bGluZSIsInN0ZXBzIiwic3RlcCIsImluZGV4Iiwic2NlbmFyaW9zIiwib2JqZWN0Iiwib2JqZWN0QXRMaW5lIiwic2NlbmFyaW9fZ2VuZXJhdGlvbl8xIiwic3RlcF9nZW5lcmF0aW9uXzEiXSwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL2NvZGUtZ2VuZXJhdGlvbi9nZW5lcmF0ZS1jb2RlLWJ5LWxpbmUtbnVtYmVyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbbnVsbF19

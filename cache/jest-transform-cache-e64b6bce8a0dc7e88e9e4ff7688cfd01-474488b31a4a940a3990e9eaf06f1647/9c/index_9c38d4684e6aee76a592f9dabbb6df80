@@ -1,0 +1,11 @@
+364a2e3d5b148d7f41728af5963d3eda
+'use strict';
+
+var stripIndent = require('strip-indent');
+var indentString = require('indent-string');
+module.exports = function (string) {
+  var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var options = arguments.length > 2 ? arguments[2] : undefined;
+  return indentString(stripIndent(string), count, options);
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJzdHJpcEluZGVudCIsInJlcXVpcmUiLCJpbmRlbnRTdHJpbmciLCJtb2R1bGUiLCJleHBvcnRzIiwic3RyaW5nIiwiY291bnQiLCJvcHRpb25zIl0sInNvdXJjZXMiOlsiaW5kZXguanMiXSwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuY29uc3Qgc3RyaXBJbmRlbnQgPSByZXF1aXJlKCdzdHJpcC1pbmRlbnQnKTtcbmNvbnN0IGluZGVudFN0cmluZyA9IHJlcXVpcmUoJ2luZGVudC1zdHJpbmcnKTtcblxubW9kdWxlLmV4cG9ydHMgPSAoc3RyaW5nLCBjb3VudCA9IDAsIG9wdGlvbnMpID0+IGluZGVudFN0cmluZyhzdHJpcEluZGVudChzdHJpbmcpLCBjb3VudCwgb3B0aW9ucyk7XG4iXSwibWFwcGluZ3MiOiJBQUFBLFlBQVk7O0FBQ1osSUFBTUEsV0FBVyxHQUFHQyxPQUFPLENBQUMsY0FBYyxDQUFDO0FBQzNDLElBQU1DLFlBQVksR0FBR0QsT0FBTyxDQUFDLGVBQWUsQ0FBQztBQUU3Q0UsTUFBTSxDQUFDQyxPQUFPLEdBQUcsVUFBQ0MsTUFBTTtFQUFBLElBQUVDLEtBQUssdUVBQUcsQ0FBQztFQUFBLElBQUVDLE9BQU87RUFBQSxPQUFLTCxZQUFZLENBQUNGLFdBQVcsQ0FBQ0ssTUFBTSxDQUFDLEVBQUVDLEtBQUssRUFBRUMsT0FBTyxDQUFDO0FBQUEifQ==

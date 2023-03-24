@@ -1,12 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import ParkingLot from "../Reducer/ParkingLot";
-
-const store = configureStore({
+import parkingSlice from "../Reducer/parkingSlice";
+export default configureStore({
     reducer: {
-        parkingLot: ParkingLot,
+        parkingSpaces: parkingSlice
     }
 })
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export default store;

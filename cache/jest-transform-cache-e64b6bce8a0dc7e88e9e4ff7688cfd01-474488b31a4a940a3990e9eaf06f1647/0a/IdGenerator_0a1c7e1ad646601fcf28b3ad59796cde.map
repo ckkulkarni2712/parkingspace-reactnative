@@ -1,0 +1,1 @@
+{"version":3,"mappings":";;;;;;;;;;AAAA;AAIA,SAAgBA,IAAI;EAClB,OAAO;IAAM,mBAAM,EAAE;EAAR,CAAQ;AACvB;AAFAC;AAIA,SAAgBC,YAAY;EAC1B,IAAIC,IAAI,GAAG,CAAC;EACZ,OAAO;IAAM,QAACA,IAAI,EAAE,EAAEC,QAAQ,EAAE;EAAnB,CAAmB;AAClC;AAHAH","names":["uuid","exports","incrementing","next","toString"],"sourceRoot":"","sources":["../../src/IdGenerator.ts"],"sourcesContent":[null]}

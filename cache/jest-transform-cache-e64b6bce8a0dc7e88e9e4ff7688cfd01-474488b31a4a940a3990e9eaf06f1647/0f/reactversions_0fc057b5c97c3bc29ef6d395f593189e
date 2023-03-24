@@ -1,0 +1,58 @@
+76de4ffbad9677d3efee059f47aa3898
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.checkReactVersionAtLeast = checkReactVersionAtLeast;
+var React = _interopRequireWildcard(require("react"));
+function _getRequireWildcardCache(nodeInterop) {
+  if (typeof WeakMap !== "function") return null;
+  var cacheBabelInterop = new WeakMap();
+  var cacheNodeInterop = new WeakMap();
+  return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
+    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+  })(nodeInterop);
+}
+function _interopRequireWildcard(obj, nodeInterop) {
+  if (!nodeInterop && obj && obj.__esModule) {
+    return obj;
+  }
+  if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
+    return {
+      default: obj
+    };
+  }
+  var cache = _getRequireWildcardCache(nodeInterop);
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+  for (var key in obj) {
+    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  newObj.default = obj;
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+  return newObj;
+}
+function checkReactVersionAtLeast(major, minor) {
+  if (React.version === undefined) return false;
+  var _React$version$split$ = React.version.split('.').map(Number),
+    _React$version$split$2 = (0, _slicedToArray2.default)(_React$version$split$, 2),
+    actualMajor = _React$version$split$2[0],
+    actualMinor = _React$version$split$2[1];
+  return actualMajor > major || actualMajor === major && actualMinor >= minor;
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7QUFBQTtBQUErQjtFQUFBO0VBQUE7RUFBQTtFQUFBO0lBQUE7RUFBQTtBQUFBO0FBQUE7RUFBQTtJQUFBO0VBQUE7RUFBQTtJQUFBO01BQUFBO0lBQUE7RUFBQTtFQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7RUFBQTtFQUFBO0lBQUE7TUFBQTtNQUFBO1FBQUFDO01BQUE7UUFBQUM7TUFBQTtJQUFBO0VBQUE7RUFBQUE7RUFBQTtJQUFBQztFQUFBO0VBQUE7QUFBQTtBQUV4QixTQUFTQyx3QkFBd0IsQ0FDdENDLEtBQWEsRUFDYkMsS0FBYSxFQUNKO0VBQ1QsSUFBSUMsS0FBSyxDQUFDQyxPQUFPLEtBQUtDLFNBQVMsRUFBRSxPQUFPLEtBQUs7RUFDN0MsNEJBQW1DRixLQUFLLENBQUNDLE9BQU8sQ0FBQ0UsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDQyxHQUFHLENBQUNDLE1BQU0sQ0FBQztJQUFBO0lBQWhFQyxXQUFXO0lBQUVDLFdBQVc7RUFFL0IsT0FBT0QsV0FBVyxHQUFHUixLQUFLLElBQUtRLFdBQVcsS0FBS1IsS0FBSyxJQUFJUyxXQUFXLElBQUlSLEtBQU07QUFDL0UiLCJuYW1lcyI6WyJkZWZhdWx0IiwiT2JqZWN0IiwibmV3T2JqIiwiY2FjaGUiLCJjaGVja1JlYWN0VmVyc2lvbkF0TGVhc3QiLCJtYWpvciIsIm1pbm9yIiwiUmVhY3QiLCJ2ZXJzaW9uIiwidW5kZWZpbmVkIiwic3BsaXQiLCJtYXAiLCJOdW1iZXIiLCJhY3R1YWxNYWpvciIsImFjdHVhbE1pbm9yIl0sInNvdXJjZXMiOlsiLi4vc3JjL3JlYWN0LXZlcnNpb25zLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAqIGFzIFJlYWN0IGZyb20gJ3JlYWN0JztcblxuZXhwb3J0IGZ1bmN0aW9uIGNoZWNrUmVhY3RWZXJzaW9uQXRMZWFzdChcbiAgbWFqb3I6IG51bWJlcixcbiAgbWlub3I6IG51bWJlclxuKTogYm9vbGVhbiB7XG4gIGlmIChSZWFjdC52ZXJzaW9uID09PSB1bmRlZmluZWQpIHJldHVybiBmYWxzZTtcbiAgY29uc3QgW2FjdHVhbE1ham9yLCBhY3R1YWxNaW5vcl0gPSBSZWFjdC52ZXJzaW9uLnNwbGl0KCcuJykubWFwKE51bWJlcik7XG5cbiAgcmV0dXJuIGFjdHVhbE1ham9yID4gbWFqb3IgfHwgKGFjdHVhbE1ham9yID09PSBtYWpvciAmJiBhY3R1YWxNaW5vciA+PSBtaW5vcik7XG59XG4iXX0=

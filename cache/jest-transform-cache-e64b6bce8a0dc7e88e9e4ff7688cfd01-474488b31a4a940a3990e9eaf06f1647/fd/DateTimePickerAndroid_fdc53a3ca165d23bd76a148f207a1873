@@ -1,0 +1,15 @@
+92ad97329c3272d6d39e2cef4f1511c0
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DateTimePickerAndroid = void 0;
+var _reactNative = require("react-native");
+var warn = function warn() {
+  console.warn("DateTimePickerAndroid is not supported on: " + _reactNative.Platform.OS);
+};
+var DateTimePickerAndroid = {
+  open: warn,
+  dismiss: warn
+};
+exports.DateTimePickerAndroid = DateTimePickerAndroid;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJ3YXJuIiwiY29uc29sZSIsIlBsYXRmb3JtIiwiT1MiLCJEYXRlVGltZVBpY2tlckFuZHJvaWQiLCJvcGVuIiwiZGlzbWlzcyJdLCJzb3VyY2VzIjpbIkRhdGVUaW1lUGlja2VyQW5kcm9pZC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBmb3JtYXRcbiAqIEBmbG93IHN0cmljdC1sb2NhbFxuICovXG5pbXBvcnQge1BsYXRmb3JtfSBmcm9tICdyZWFjdC1uYXRpdmUnO1xuXG5jb25zdCB3YXJuID0gKCkgPT4ge1xuICBjb25zb2xlLndhcm4oYERhdGVUaW1lUGlja2VyQW5kcm9pZCBpcyBub3Qgc3VwcG9ydGVkIG9uOiAke1BsYXRmb3JtLk9TfWApO1xufTtcblxuZXhwb3J0IGNvbnN0IERhdGVUaW1lUGlja2VyQW5kcm9pZCA9IHtvcGVuOiB3YXJuLCBkaXNtaXNzOiB3YXJufTtcbiJdLCJtYXBwaW5ncyI6Ijs7OztBQUlBO0FBRUEsSUFBTUEsSUFBSSxHQUFHLFNBQVBBLElBQUksR0FBUztFQUNqQkMsT0FBTyxDQUFDRCxJQUFJLGlEQUErQ0UscUJBQVEsQ0FBQ0MsRUFBRSxDQUFHO0FBQzNFLENBQUM7QUFFTSxJQUFNQyxxQkFBcUIsR0FBRztFQUFDQyxJQUFJLEVBQUVMLElBQUk7RUFBRU0sT0FBTyxFQUFFTjtBQUFJLENBQUM7QUFBQyJ9

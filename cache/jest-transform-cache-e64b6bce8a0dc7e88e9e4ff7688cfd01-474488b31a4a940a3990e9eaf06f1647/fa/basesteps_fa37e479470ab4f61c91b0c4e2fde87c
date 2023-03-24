@@ -1,0 +1,23 @@
+0669c5a80fb44314a3c837a054367d50
+_getJestObj().mock('@react-navigation/native', function () {
+  return {
+    useNavigation: jest.fn().mockReturnValue({
+      navigate: jest.fn()
+    })
+  };
+});
+require("text-encoding");
+var _uuid = require("uuid");
+require("react-native-get-random-values");
+var _jestCucumber = require("jest-cucumber");
+function _getJestObj() {
+  var _require = require("@jest/globals"),
+    jest = _require.jest;
+  _getJestObj = function _getJestObj() {
+    return jest;
+  };
+  return jest;
+}
+var feature = (0, _jestCucumber.loadFeature)('./features/base.feature');
+var uuid = (0, _uuid.v4)();
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJtb2NrIiwidXNlTmF2aWdhdGlvbiIsImplc3QiLCJmbiIsIm1vY2tSZXR1cm5WYWx1ZSIsIm5hdmlnYXRlIiwiZmVhdHVyZSIsImxvYWRGZWF0dXJlIiwidXVpZCIsInV1aWR2NCJdLCJzb3VyY2VzIjpbImJhc2Uuc3RlcHMudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCAndGV4dC1lbmNvZGluZyc7XHJcbmltcG9ydCB7djQgYXMgdXVpZHY0fSBmcm9tICd1dWlkJztcclxuaW1wb3J0ICdyZWFjdC1uYXRpdmUtZ2V0LXJhbmRvbS12YWx1ZXMnO1xyXG5pbXBvcnQge2ZpcmVFdmVudCwgcmVuZGVyLCB3YWl0Rm9yfSBmcm9tICdAdGVzdGluZy1saWJyYXJ5L3JlYWN0LW5hdGl2ZSc7XHJcbmltcG9ydCB7bG9hZEZlYXR1cmUsIGRlZmluZUZlYXR1cmV9IGZyb20gJ2plc3QtY3VjdW1iZXInO1xyXG5pbXBvcnQge3VzZU5hdmlnYXRpb259IGZyb20gJ0ByZWFjdC1uYXZpZ2F0aW9uL25hdGl2ZSc7XHJcbmltcG9ydCB7TmF0aXZlU3RhY2tOYXZpZ2F0aW9uUHJvcH0gZnJvbSAnQHJlYWN0LW5hdmlnYXRpb24vbmF0aXZlLXN0YWNrJztcclxuY29uc3QgZmVhdHVyZSA9IGxvYWRGZWF0dXJlKCcuL2ZlYXR1cmVzL2Jhc2UuZmVhdHVyZScpO1xyXG5jb25zdCB1dWlkID0gdXVpZHY0KCk7XHJcbmplc3QubW9jaygnQHJlYWN0LW5hdmlnYXRpb24vbmF0aXZlJywgKCkgPT4ge1xyXG4gIHJldHVybiB7XHJcbiAgICB1c2VOYXZpZ2F0aW9uOiBqZXN0LmZuKCkubW9ja1JldHVyblZhbHVlKHtcclxuICAgICAgbmF2aWdhdGU6IGplc3QuZm4oKSxcclxuICAgIH0pLFxyXG4gIH07XHJcbn0pO1xyXG4iXSwibWFwcGluZ3MiOiJBQVVBLGNBQUtBLElBQUksQ0FBQywwQkFBMEIsRUFBRSxZQUFNO0VBQzFDLE9BQU87SUFDTEMsYUFBYSxFQUFFQyxJQUFJLENBQUNDLEVBQUUsRUFBRSxDQUFDQyxlQUFlLENBQUM7TUFDdkNDLFFBQVEsRUFBRUgsSUFBSSxDQUFDQyxFQUFFO0lBQ25CLENBQUM7RUFDSCxDQUFDO0FBQ0gsQ0FBQyxDQUFDO0FBZkY7QUFDQTtBQUNBO0FBRUE7QUFBeUQ7RUFBQTtJQUFBO0VBQUE7SUFBQTtFQUFBO0VBQUE7QUFBQTtBQUd6RCxJQUFNRyxPQUFPLEdBQUcsSUFBQUMseUJBQVcsRUFBQyx5QkFBeUIsQ0FBQztBQUN0RCxJQUFNQyxJQUFJLEdBQUcsSUFBQUMsUUFBTSxHQUFFIn0=

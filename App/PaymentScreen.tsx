@@ -1,104 +1,99 @@
+import {Alert, Button, StyleSheet, Text, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Alert, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-export default function PaymentScreen({route}: any) {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const {spaces, space, details, markSpaceAsUnoccupied} = route.params;
-  const [parkingCharge, setCharges] = useState<number>(0);
-  const [timeSpent, setTimeSpent] = useState<string>('0 hours 0 minutes');
-  useEffect(() => {
-    calculateCharges();
-  }, [details]);
-  function calculateCharges() {
-    const timeDiff = new Date().getTime() - Date.parse(details.time);
-    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-    const minutes = Math.abs(
-      Math.abs(Math.ceil((timeDiff % (1000 * 3600)) / (1000 * 60))),
-    );
-    const twoHourCharge = 10;
-    let extra = 0;
-    if (hours > 2) {
-      extra = (hours - 1) * 10;
-    }
-    setCharges(twoHourCharge + extra);
-    updateTimeSpent(hours, minutes);
-  }
-  function updateTimeSpent(hours: number, minutes: number) {
-    if (minutes > 60) {
-      hours += Math.floor(minutes / 60);
-      minutes = minutes % 60;
-    }
-    if (minutes > 0) {
-      minutes -= 1;
-    }
-    const timeSpentString = `${hours} hours ${minutes} minutes`;
-    setTimeSpent(timeSpentString);
-  }
+import {useDispatch} from 'react-redux';
+import {paymentComplete} from './Reducer/parkingSlice';
 
-  async function handlePayment() {
-    const registration = details.reg;
-    const charge = parkingCharge;
+const PaymentScreen = ({route}: any) => {
+  const dispatch = useDispatch();
+  const {spaceDetails, space} = route.params;
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const [hoursParked, setHoursParked] = useState<number | null>(null);
+  useEffect(() => {
+    const [parkingHours, parkingMinutes] = spaceDetails.parkingTime.split(':');
+    const parkedTime = new Date();
+    parkedTime.setHours(Number(parkingHours), Number(parkingMinutes), 0, 0);
+    const hoursParked = Math.ceil(
+      (new Date().getTime() - parkedTime.getTime()) / (1000 * 60 * 60) - 1,
+    );
+    setHoursParked(hoursParked);
+  }, [spaceDetails.parkingTime]);
+  const calculateParkingCharges = (parkingTime: any) => {
+    const [parkingHours, parkingMinutes] = parkingTime.split(':');
+    const parkedTime = new Date();
+    parkedTime.setHours(Number(parkingHours), Number(parkingMinutes), 0, 0);
+    const hoursParked = Math.ceil(
+      (new Date().getTime() - parkedTime.getTime()) / (1000 * 60 * 60),
+    );
+    let parkingCharge = 10;
+    if (hoursParked > 2) {
+      parkingCharge += (hoursParked - 2) * 10 - 10;
+    }
+    return parkingCharge;
+  };
+
+  const [payment, setPayment] = useState(
+    calculateParkingCharges(spaceDetails.parkingTime),
+  );
+  const handleSubmit = async () => {
+    const reg = spaceDetails.registration;
+    const charges = payment;
     try {
-      const resultSet = await fetch(`https://httpstat.us/200`, {
+      const result = await fetch(`https://httpstat.us/200`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          'car-registration': registration,
-          charge: charge,
+          'car-registration': reg,
+          charge: charges,
         }),
       });
-      if (resultSet.ok) {
-        Alert.alert(`Payment Sucessful`);
-        markSpaceAsUnoccupied(space);
-        navigation.goBack();
+      if (result.ok) {
+        Alert.alert('Payment Successful!');
+        dispatch(paymentComplete(space));
+        navigation.navigate('Parking Spaces');
       } else {
         Alert.alert('Payment Failed');
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }
+  };
   return (
     <View style={styles.container}>
-      {details && (
-        <View>
-          <View style={styles.buttonStyle2}>
-            <Button
-              color="#0551B4"
-              title="Go Back"
-              onPress={() => {
-                navigation.goBack();
-              }}
-              testID="deregester-back"
-            />
-          </View>
-          <View style={styles.details}>
-            <Text style={styles.textStyle}>
-              Car Registration: {details.reg}
-            </Text>
-            <Text testID="deregester-time-spent" style={styles.textStyle}>
-              Time Spent: {timeSpent}
-            </Text>
-            <Text testID="deregester-charge">
-              Parking Charges: ${parkingCharge}
-            </Text>
-          </View>
-          <View style={styles.buttonStyle1}>
-            <Button
-              color="#0551B4"
-              title="Payment Taken"
-              onPress={handlePayment}
-              testID="deregester-payment-button"
-            />
-          </View>
-        </View>
-      )}
+      <Button
+        color="#0551B4"
+        title="Go Back"
+        onPress={() => {
+          navigation.goBack();
+        }}
+        testID="deregester-back"
+      />
+
+      <View style={styles.details}>
+        <Text style={styles.textStyle}>
+          Car Registration: {spaceDetails.registration}
+        </Text>
+        <Text testID="deregester-time-spent" style={styles.textStyle}>
+          Time Spent: {hoursParked}
+        </Text>
+        <Text testID="deregester-charge">Parking Charges: ${payment}</Text>
+      </View>
+      <View style={styles.buttonStyle1}>
+        <Button
+          color="#0551B4"
+          title="Payment Taken"
+          onPress={handleSubmit}
+          testID="deregester-payment-button"
+        />
+      </View>
     </View>
   );
-}
+};
+
+export default PaymentScreen;
 
 const styles = StyleSheet.create({
   container: {

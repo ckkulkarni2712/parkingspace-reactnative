@@ -1,0 +1,12 @@
+7ef55cd6a1daa0a1dd3ceefb1c7ee9da
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getQueryPrefix = getQueryPrefix;
+function getQueryPrefix(queryName) {
+  var parts = queryName.split('By');
+  return parts[0];
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQU8sU0FBU0EsY0FBYyxDQUFDQyxTQUFpQixFQUFFO0VBQ2hELElBQU1DLEtBQUssR0FBR0QsU0FBUyxDQUFDRSxLQUFLLENBQUMsSUFBSSxDQUFDO0VBQ25DLE9BQU9ELEtBQUssQ0FBQyxDQUFDLENBQUM7QUFDakIiLCJuYW1lcyI6WyJnZXRRdWVyeVByZWZpeCIsInF1ZXJ5TmFtZSIsInBhcnRzIiwic3BsaXQiXSwic291cmNlcyI6WyIuLi8uLi9zcmMvaGVscGVycy9xdWVyeS1uYW1lLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBmdW5jdGlvbiBnZXRRdWVyeVByZWZpeChxdWVyeU5hbWU6IHN0cmluZykge1xuICBjb25zdCBwYXJ0cyA9IHF1ZXJ5TmFtZS5zcGxpdCgnQnknKTtcbiAgcmV0dXJuIHBhcnRzWzBdO1xufVxuIl19

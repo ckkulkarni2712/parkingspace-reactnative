@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View} from 'react-native';
 import {
   Text,
@@ -10,108 +10,109 @@ import {
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-
-export default function ParkingSpace({route}: any) {
-  const {numspaces} = route.params;
-  const [details, setDetails] = useState<
-    Array<{
-      selected: number;
-      time: Date;
-      reg: string;
-    } | null>
-  >(Array(numspaces).fill(null));
-
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  addToParkingSpace,
+  occupyParkingLots,
+  removeParkingSpace,
+} from './Reducer/parkingSlice';
+const ParkingSpace = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const [selectedSpace, setSelected] = useState(0);
+  const dispatch = useDispatch();
+  const numspaces = useSelector((state: any) => state.parkingSpaces.numSpaces);
+  const [displayForm, setDisplayForm] = useState<boolean>(false);
+  const [registration, setReg] = useState<string>('');
+  const [parkingTime, setTime] = useState<Date>(new Date());
+  const [selectedSpace, setSelected] = useState<number>(0);
+  const [activatePayment, setActivation] = useState<boolean>(false);
+  const spaces = useSelector((state: any) => state.parkingSpaces.spaces);
   const [showPicker, setPicker] = useState(false);
-  const [time, setTime] = useState(new Date());
-  const [reg, setReg] = useState('');
-  const [parkingSpaces, setParkingSpaces] = useState(() => {
-    const spaces = [];
+  const [displaySpaces, setDisplay] = useState(() => {
+    const renderSpaces = [];
     for (let i = 1; i <= numspaces; i++) {
-      spaces.push(i);
+      renderSpaces.push(i);
     }
-    return spaces;
+    return renderSpaces;
   });
-  const handleAddParkingSpace = () => {
-    setParkingSpaces(spaces => [...spaces, spaces.length + 1]);
-  };
-  function handleSelected(space: number) {
-    const occupied =
-      details[space - 1] && details[space - 1]?.selected === space;
-    if (occupied) {
-      navigation.navigate('Payment', {
-        spaces: numspaces,
-        space: space,
-        details: {
-          time: details[space - 1]?.time,
-          reg: details[space - 1]?.reg,
-        },
-        markSpaceAsUnoccupied: (space: number) => markSpaceAsUnoccupied(space),
-      });
-    } else {
-      setSelected(space);
+  useEffect(() => {
+    const renderSpaces = [];
+    for (let i = 1; i <= numspaces; i++) {
+      renderSpaces.push(i);
     }
-  }
-
-  function handleParkVehicle(selectedSpace: number) {
-    const newDetails = [...details];
-    newDetails[selectedSpace - 1] = {
-      selected: selectedSpace,
-      time: time,
-      reg: reg,
-    };
-    setDetails(newDetails);
-  }
-
-  const setVehicleRegistration = (text: string) => {
+    setDisplay(renderSpaces);
+  }, [numspaces]);
+  const handleIncrement = () => {
+    dispatch(addToParkingSpace());
+  };
+  const handleDecrement = () => {
+    dispatch(removeParkingSpace());
+  };
+  const handleSpaceClick = (space: number) => {
+    if (spaces[space]) {
+      navigation.navigate('Payment', {
+        spaceDetails: spaces[space],
+        space: space,
+      });
+    }
+    setSelected(space);
+    setDisplayForm(true);
+  };
+  const handleSubmit = () => {
+    dispatch(
+      occupyParkingLots({
+        spaceNum: selectedSpace,
+        registration: registration,
+        parkingTime: parkingTime.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        }),
+      }),
+    );
+    setSelected(0);
+    setReg('');
+    setTime(new Date());
+  };
+  const handleRegistration = (text: string) => {
     setReg(text);
+  };
+  const setParkingTime = (selectedTime: Date) => {
+    setTime(selectedTime);
   };
   const hidePicker = () => {
     setPicker(false);
   };
-
-  const setParkingTime = (selectedTime: Date) => {
-    setTime(selectedTime);
-    hidePicker();
-  };
-  function markSpaceAsUnoccupied(space: number) {
-    const newDetails = [...details];
-    newDetails[space - 1] = null;
-    setDetails(newDetails);
-  }
-
   return (
     <ScrollView contentContainerStyle={styles.container} horizontal={true}>
       <TouchableOpacity
         testID="add-parking-space-button"
         style={styles.buttonStyling1}
-        onPress={handleAddParkingSpace}>
+        onPress={handleIncrement}>
         <Text>Create New Parking</Text>
       </TouchableOpacity>
-      {parkingSpaces.map(space => (
+      <TouchableOpacity
+        testID="remove-parking-space-button"
+        onPress={handleDecrement}
+        style={styles.buttonStyling2}>
+        <Text>Remove Parking Space</Text>
+      </TouchableOpacity>
+      {displaySpaces.map(space => (
         <TouchableOpacity
           testID={`parking-space-${space}`}
-          onPress={() => handleSelected(space)}
+          onPress={() => handleSpaceClick(space)}
           key={space}
           style={styles.parkingSpace}>
-          {details[space - 1] && details[space - 1]?.selected === space ? (
-            <View style={styles.spaceDetails}>
-              <Text style={{color: 'white'}}>{space}</Text>
-              <Text style={{color: 'white'}}>{details[space - 1]?.reg}</Text>
-              <Text style={{color: 'white'}}>
-                {details[space - 1]?.time.toLocaleTimeString()}
-              </Text>
+          <Text>{space}</Text>
+          {spaces[space] && (
+            <View>
+              <Text>Registration: {spaces[space].registration}</Text>
+              <Text>Parking Time: {spaces[space].parkingTime}</Text>
             </View>
-          ) : (
-            <Text style={styles.parkingNumber}>{space}</Text>
           )}
         </TouchableOpacity>
       ))}
-
-      {selectedSpace > 0 && (
-        <View style={styles.formContainer} testID="selected-parking-space">
-          <Text>{reg}</Text>
+      {displayForm && (
+        <View style={styles.formContainer}>
           <DateTimePickerModal
             isVisible={showPicker}
             mode="time"
@@ -125,28 +126,31 @@ export default function ParkingSpace({route}: any) {
               setPicker(true);
             }}
             testID="change-time-button">
-            <Text testID="parking-time">{time.toLocaleTimeString()}</Text>
+            <Text testID="parking-time">
+              {parkingTime.toLocaleTimeString()}
+            </Text>
           </TouchableOpacity>
           <Text testID="car-registration-label">Car Registration</Text>
           <TextInput
             placeholder="Enter vehicle registration"
-            onChangeText={setVehicleRegistration}
+            onChangeText={handleRegistration}
             style={styles.formInput}
             testID="vehicle-registration-input"
           />
           <TouchableOpacity
             testID="submit-button"
-            onPress={() => handleParkVehicle(selectedSpace)}
-            style={styles.buttonStyling2}>
+            onPress={() => handleSubmit()}
+            style={styles.buttonStyling3}>
             <Text style={{color: 'white'}}>Submit</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.buttonStyling2}
+            style={styles.buttonStyling3}
             onPress={() => {
               setSelected(0);
-              setVehicleRegistration('');
+              handleRegistration('');
               setParkingTime(new Date());
+              setDisplayForm(false);
             }}
             testID="close-button">
             <Text style={{color: 'white'}}>Close</Text>
@@ -155,7 +159,10 @@ export default function ParkingSpace({route}: any) {
       )}
     </ScrollView>
   );
-}
+};
+
+export default ParkingSpace;
+
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -186,6 +193,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     padding: 10,
     backgroundColor: '#E1EDF8',
+    left: 50,
+  },
+  buttonStyling2: {
+    top: 0,
+    right: 10,
+    position: 'absolute',
+    padding: 10,
+    backgroundColor: '#E1EDF8',
   },
   formInput: {
     marginTop: 7,
@@ -207,7 +222,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     zIndex: 1,
   },
-  buttonStyling2: {
+  buttonStyling3: {
     marginTop: 5,
     backgroundColor: '#0551B4',
     flex: 1,

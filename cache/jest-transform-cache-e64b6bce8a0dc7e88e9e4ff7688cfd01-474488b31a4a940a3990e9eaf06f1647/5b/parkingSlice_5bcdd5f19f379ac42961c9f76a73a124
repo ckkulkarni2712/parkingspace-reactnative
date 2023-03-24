@@ -1,0 +1,59 @@
+65d68880c8e722b15a4add3f38ddc8ca
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeParkingSpace = exports.paymentComplete = exports.parkingSlice = exports.occupyParkingLots = exports.initializeParkingLot = exports.default = exports.addToParkingSpace = void 0;
+var _toolkit = require("@reduxjs/toolkit");
+var parkingSlice = (0, _toolkit.createSlice)({
+  name: "Parking Space",
+  initialState: {
+    numSpaces: 0,
+    occupiedSpaces: 0,
+    spaces: {}
+  },
+  reducers: {
+    initializeParkingLot: function initializeParkingLot(state, action) {
+      state.numSpaces = action.payload;
+    },
+    addToParkingSpace: function addToParkingSpace(state) {
+      state.numSpaces += 1;
+    },
+    removeParkingSpace: function removeParkingSpace(state) {
+      var spaces = state.spaces;
+      delete spaces[state.numSpaces];
+      state.numSpaces -= 1;
+    },
+    occupyParkingLots: function occupyParkingLots(state, action) {
+      var _action$payload = action.payload,
+        spaceNum = _action$payload.spaceNum,
+        registration = _action$payload.registration,
+        parkingTime = _action$payload.parkingTime;
+      state.spaces[spaceNum] = {
+        registration: registration,
+        parkingTime: parkingTime
+      };
+      state.occupiedSpaces++;
+    },
+    paymentComplete: function paymentComplete(state, action) {
+      var spaces = state.spaces;
+      var selected = action.payload;
+      delete spaces[selected];
+      state.occupiedSpaces--;
+    }
+  }
+});
+exports.parkingSlice = parkingSlice;
+var _parkingSlice$actions = parkingSlice.actions,
+  initializeParkingLot = _parkingSlice$actions.initializeParkingLot,
+  occupyParkingLots = _parkingSlice$actions.occupyParkingLots,
+  addToParkingSpace = _parkingSlice$actions.addToParkingSpace,
+  removeParkingSpace = _parkingSlice$actions.removeParkingSpace,
+  paymentComplete = _parkingSlice$actions.paymentComplete;
+exports.paymentComplete = paymentComplete;
+exports.removeParkingSpace = removeParkingSpace;
+exports.addToParkingSpace = addToParkingSpace;
+exports.occupyParkingLots = occupyParkingLots;
+exports.initializeParkingLot = initializeParkingLot;
+var _default = parkingSlice.reducer;
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJwYXJraW5nU2xpY2UiLCJjcmVhdGVTbGljZSIsIm5hbWUiLCJpbml0aWFsU3RhdGUiLCJudW1TcGFjZXMiLCJvY2N1cGllZFNwYWNlcyIsInNwYWNlcyIsInJlZHVjZXJzIiwiaW5pdGlhbGl6ZVBhcmtpbmdMb3QiLCJzdGF0ZSIsImFjdGlvbiIsInBheWxvYWQiLCJhZGRUb1BhcmtpbmdTcGFjZSIsInJlbW92ZVBhcmtpbmdTcGFjZSIsIm9jY3VweVBhcmtpbmdMb3RzIiwic3BhY2VOdW0iLCJyZWdpc3RyYXRpb24iLCJwYXJraW5nVGltZSIsInBheW1lbnRDb21wbGV0ZSIsInNlbGVjdGVkIiwiYWN0aW9ucyIsInJlZHVjZXIiXSwic291cmNlcyI6WyJwYXJraW5nU2xpY2UudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgY3JlYXRlU2xpY2UgfSBmcm9tICdAcmVkdXhqcy90b29sa2l0JztcclxudHlwZSBQYXltZW50Q29tcGxldGVBY3Rpb24gPSB7XHJcbiAgICB0eXBlOiBzdHJpbmc7XHJcbiAgICBwYXlsb2FkOmFueTtcclxuICB9O1xyXG5leHBvcnQgY29uc3QgcGFya2luZ1NsaWNlID0gY3JlYXRlU2xpY2Uoe1xyXG4gICAgbmFtZTogXCJQYXJraW5nIFNwYWNlXCIsXHJcbiAgICBpbml0aWFsU3RhdGU6IHtcclxuICAgICAgICBudW1TcGFjZXM6IDAsXHJcbiAgICAgICAgb2NjdXBpZWRTcGFjZXM6IDAsXHJcbiAgICAgICAgc3BhY2VzOiB7fSxcclxuICAgIH0sXHJcbiAgICByZWR1Y2Vyczoge1xyXG4gICAgICAgIGluaXRpYWxpemVQYXJraW5nTG90OiAoc3RhdGUsIGFjdGlvbikgPT4ge1xyXG4gICAgICAgICAgICBzdGF0ZS5udW1TcGFjZXMgPSBhY3Rpb24ucGF5bG9hZDtcclxuICAgICAgICB9LFxyXG4gICAgICAgIGFkZFRvUGFya2luZ1NwYWNlOiAoc3RhdGUpID0+IHtcclxuICAgICAgICAgICAgc3RhdGUubnVtU3BhY2VzKz0gMTsgIFxyXG4gICAgICAgIH0sXHJcbiAgICAgICAgcmVtb3ZlUGFya2luZ1NwYWNlOiAoc3RhdGU6IGFueSkgPT4ge1xyXG4gICAgICAgICAgICBjb25zdCBzcGFjZXMgPSBzdGF0ZS5zcGFjZXM7XHJcbiAgICAgICAgICAgIGRlbGV0ZSBzcGFjZXNbc3RhdGUubnVtU3BhY2VzXTtcclxuICAgICAgICAgICAgc3RhdGUubnVtU3BhY2VzIC09IDFcclxuICAgICAgICB9LFxyXG4gICAgICAgIFxyXG4gICAgICAgIG9jY3VweVBhcmtpbmdMb3RzOiAoc3RhdGU6IGFueSwgYWN0aW9uKSA9PiB7XHJcbiAgICAgICAgICAgIGNvbnN0IHsgc3BhY2VOdW0sIHJlZ2lzdHJhdGlvbiwgcGFya2luZ1RpbWUgfSA9IGFjdGlvbi5wYXlsb2FkO1xyXG4gICAgICAgICAgICBzdGF0ZS5zcGFjZXNbc3BhY2VOdW1dID0geyByZWdpc3RyYXRpb24sIHBhcmtpbmdUaW1lIH07XHJcbiAgICAgICAgICAgIHN0YXRlLm9jY3VwaWVkU3BhY2VzKys7XHJcbiAgICAgICAgfSxcclxuICAgICAgICBwYXltZW50Q29tcGxldGU6IChzdGF0ZTogYW55LCBhY3Rpb246IFBheW1lbnRDb21wbGV0ZUFjdGlvbikgPT4ge1xyXG4gICAgICAgICAgICBjb25zdCBzcGFjZXMgPSBzdGF0ZS5zcGFjZXM7XHJcbiAgICAgICAgICAgIGNvbnN0IHNlbGVjdGVkICA9IGFjdGlvbi5wYXlsb2FkO1xyXG4gICAgICAgICAgICBkZWxldGUgc3BhY2VzW3NlbGVjdGVkXTtcclxuICAgICAgICAgICAgc3RhdGUub2NjdXBpZWRTcGFjZXMtLTtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbn0pXHJcbmV4cG9ydCBjb25zdCB7IGluaXRpYWxpemVQYXJraW5nTG90LCBvY2N1cHlQYXJraW5nTG90cywgYWRkVG9QYXJraW5nU3BhY2UsIHJlbW92ZVBhcmtpbmdTcGFjZSwgcGF5bWVudENvbXBsZXRlfSA9IHBhcmtpbmdTbGljZS5hY3Rpb25zO1xyXG5leHBvcnQgZGVmYXVsdCBwYXJraW5nU2xpY2UucmVkdWNlcjsiXSwibWFwcGluZ3MiOiI7Ozs7QUFBQTtBQUtPLElBQU1BLFlBQVksR0FBRyxJQUFBQyxvQkFBVyxFQUFDO0VBQ3BDQyxJQUFJLEVBQUUsZUFBZTtFQUNyQkMsWUFBWSxFQUFFO0lBQ1ZDLFNBQVMsRUFBRSxDQUFDO0lBQ1pDLGNBQWMsRUFBRSxDQUFDO0lBQ2pCQyxNQUFNLEVBQUUsQ0FBQztFQUNiLENBQUM7RUFDREMsUUFBUSxFQUFFO0lBQ05DLG9CQUFvQixFQUFFLDhCQUFDQyxLQUFLLEVBQUVDLE1BQU0sRUFBSztNQUNyQ0QsS0FBSyxDQUFDTCxTQUFTLEdBQUdNLE1BQU0sQ0FBQ0MsT0FBTztJQUNwQyxDQUFDO0lBQ0RDLGlCQUFpQixFQUFFLDJCQUFDSCxLQUFLLEVBQUs7TUFDMUJBLEtBQUssQ0FBQ0wsU0FBUyxJQUFHLENBQUM7SUFDdkIsQ0FBQztJQUNEUyxrQkFBa0IsRUFBRSw0QkFBQ0osS0FBVSxFQUFLO01BQ2hDLElBQU1ILE1BQU0sR0FBR0csS0FBSyxDQUFDSCxNQUFNO01BQzNCLE9BQU9BLE1BQU0sQ0FBQ0csS0FBSyxDQUFDTCxTQUFTLENBQUM7TUFDOUJLLEtBQUssQ0FBQ0wsU0FBUyxJQUFJLENBQUM7SUFDeEIsQ0FBQztJQUVEVSxpQkFBaUIsRUFBRSwyQkFBQ0wsS0FBVSxFQUFFQyxNQUFNLEVBQUs7TUFDdkMsc0JBQWdEQSxNQUFNLENBQUNDLE9BQU87UUFBdERJLFFBQVEsbUJBQVJBLFFBQVE7UUFBRUMsWUFBWSxtQkFBWkEsWUFBWTtRQUFFQyxXQUFXLG1CQUFYQSxXQUFXO01BQzNDUixLQUFLLENBQUNILE1BQU0sQ0FBQ1MsUUFBUSxDQUFDLEdBQUc7UUFBRUMsWUFBWSxFQUFaQSxZQUFZO1FBQUVDLFdBQVcsRUFBWEE7TUFBWSxDQUFDO01BQ3REUixLQUFLLENBQUNKLGNBQWMsRUFBRTtJQUMxQixDQUFDO0lBQ0RhLGVBQWUsRUFBRSx5QkFBQ1QsS0FBVSxFQUFFQyxNQUE2QixFQUFLO01BQzVELElBQU1KLE1BQU0sR0FBR0csS0FBSyxDQUFDSCxNQUFNO01BQzNCLElBQU1hLFFBQVEsR0FBSVQsTUFBTSxDQUFDQyxPQUFPO01BQ2hDLE9BQU9MLE1BQU0sQ0FBQ2EsUUFBUSxDQUFDO01BQ3ZCVixLQUFLLENBQUNKLGNBQWMsRUFBRTtJQUMxQjtFQUNKO0FBQ0osQ0FBQyxDQUFDO0FBQUE7QUFDSyw0QkFBMkdMLFlBQVksQ0FBQ29CLE9BQU87RUFBdkhaLG9CQUFvQix5QkFBcEJBLG9CQUFvQjtFQUFFTSxpQkFBaUIseUJBQWpCQSxpQkFBaUI7RUFBRUYsaUJBQWlCLHlCQUFqQkEsaUJBQWlCO0VBQUVDLGtCQUFrQix5QkFBbEJBLGtCQUFrQjtFQUFFSyxlQUFlLHlCQUFmQSxlQUFlO0FBQXlCO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSxlQUN4SGxCLFlBQVksQ0FBQ3FCLE9BQU87QUFBQSJ9

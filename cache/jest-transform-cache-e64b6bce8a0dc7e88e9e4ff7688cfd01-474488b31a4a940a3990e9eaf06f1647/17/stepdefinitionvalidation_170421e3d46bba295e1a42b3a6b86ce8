@@ -1,0 +1,53 @@
+deedbc5cee94e8d3afaba28c38bb7a46
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ensureFeatureFileAndStepDefinitionScenarioHaveSameSteps = exports.matchSteps = void 0;
+var scenario_generation_1 = require("../code-generation/scenario-generation");
+var step_generation_1 = require("../code-generation/step-generation");
+exports.matchSteps = function (stepFromFeatureFile, stepMatcher) {
+  if (typeof stepMatcher === 'string') {
+    return stepFromFeatureFile.toLocaleLowerCase() === stepMatcher.toLocaleLowerCase();
+  } else if (stepMatcher instanceof RegExp) {
+    return stepFromFeatureFile.match(stepMatcher);
+  } else {
+    return false;
+  }
+};
+exports.ensureFeatureFileAndStepDefinitionScenarioHaveSameSteps = function (options, parsedScenario, scenarioFromStepDefinitions) {
+  if (options && options.errors === false) {
+    return;
+  }
+  if (!parsedScenario) {
+    return;
+  }
+  var errors = [];
+  var parsedScenarioSteps = [];
+  if (parsedScenario.scenarios) {
+    var parsedScenarioOutlineScenarios = parsedScenario.scenarios;
+    if (parsedScenarioOutlineScenarios && parsedScenarioOutlineScenarios.length) {
+      parsedScenarioSteps = parsedScenarioOutlineScenarios[0].steps;
+    } else {
+      parsedScenarioSteps = [];
+    }
+  } else if (parsedScenario.steps) {
+    parsedScenarioSteps = parsedScenario.steps;
+  }
+  var parsedStepCount = parsedScenarioSteps.length;
+  var stepDefinitionCount = scenarioFromStepDefinitions.steps.length;
+  if (parsedStepCount !== stepDefinitionCount && options.errors) {
+    errors.push("Scenario \"" + parsedScenario.title + "\" has " + parsedStepCount + " step(s) in the feature file, but " + stepDefinitionCount + " step definition(s) defined. Try adding the following code:\n\n" + scenario_generation_1.generateScenarioCode(parsedScenario));
+  }
+  parsedScenarioSteps.forEach(function (parsedStep, index) {
+    var stepFromStepDefinitions = scenarioFromStepDefinitions.steps[index];
+    if (!stepFromStepDefinitions || !exports.matchSteps(parsedStep.stepText, stepFromStepDefinitions.stepMatcher)) {
+      errors.push("Expected step #" + (index + 1) + " in scenario \"" + parsedScenario.title + "\" to match \"" + parsedStep.stepText + "\". Try adding the following code:\n\n" + step_generation_1.generateStepCode(parsedScenario.steps, index));
+    }
+  });
+  if (errors.length) {
+    throw new Error(errors.join('\n\n'));
+  }
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQ0E7QUFDQTtBQUVhQSxrQkFBVSxHQUFHLFVBQUNDLG1CQUEyQixFQUFFQyxXQUE0QjtFQUNoRixJQUFJLE9BQU9BLFdBQVcsS0FBSyxRQUFRLEVBQUU7SUFDakMsT0FBT0QsbUJBQW1CLENBQUNFLGlCQUFpQixFQUFFLEtBQUtELFdBQVcsQ0FBQ0MsaUJBQWlCLEVBQUU7R0FDckYsTUFBTSxJQUFJRCxXQUFXLFlBQVlFLE1BQU0sRUFBRTtJQUN0QyxPQUFPSCxtQkFBbUIsQ0FBQ0ksS0FBSyxDQUFDSCxXQUFXLENBQUM7R0FDaEQsTUFBTTtJQUNILE9BQU8sS0FBSzs7QUFFcEIsQ0FBQztBQUVZRiwrREFBdUQsR0FBRyxVQUNuRU0sT0FBZ0IsRUFDaEJDLGNBQXNELEVBQ3REQywyQkFBd0Q7RUFFeEQsSUFBSUYsT0FBTyxJQUFJQSxPQUFPLENBQUNHLE1BQU0sS0FBSyxLQUFLLEVBQUU7SUFDckM7O0VBR0osSUFBSSxDQUFDRixjQUFjLEVBQUU7SUFDakI7O0VBR0osSUFBTUUsTUFBTSxHQUFhLEVBQUU7RUFFM0IsSUFBSUMsbUJBQW1CLEdBQWlCLEVBQUU7RUFFMUMsSUFBS0gsY0FBd0MsQ0FBQ0ksU0FBUyxFQUFFO0lBQ3JELElBQU1DLDhCQUE4QixHQUFJTCxjQUF3QyxDQUFDSSxTQUFTO0lBRTFGLElBQUlDLDhCQUE4QixJQUFJQSw4QkFBOEIsQ0FBQ0MsTUFBTSxFQUFFO01BQ3pFSCxtQkFBbUIsR0FBR0UsOEJBQThCLENBQUMsQ0FBQyxDQUFDLENBQUNFLEtBQUs7S0FDaEUsTUFBTTtNQUNISixtQkFBbUIsR0FBRyxFQUFFOztHQUUvQixNQUFNLElBQUtILGNBQWlDLENBQUNPLEtBQUssRUFBRTtJQUNqREosbUJBQW1CLEdBQUlILGNBQWlDLENBQUNPLEtBQUs7O0VBR2xFLElBQU1DLGVBQWUsR0FBR0wsbUJBQW1CLENBQUNHLE1BQU07RUFDbEQsSUFBTUcsbUJBQW1CLEdBQUdSLDJCQUEyQixDQUFDTSxLQUFLLENBQUNELE1BQU07RUFFcEUsSUFBSUUsZUFBZSxLQUFLQyxtQkFBbUIsSUFBSVYsT0FBTyxDQUFDRyxNQUFNLEVBQUU7SUFFM0RBLE1BQU0sQ0FBQ1EsSUFBSSxDQUFDLGdCQUFhVixjQUFjLENBQUNXLEtBQUssZUFBU0gsZUFBZSwwQ0FBcUNDLG1CQUFtQix1RUFBa0VHLDBDQUFvQixDQUFDWixjQUFjLENBQUcsQ0FBQzs7RUFHMU9HLG1CQUFtQixDQUFDVSxPQUFPLENBQUMsVUFBQ0MsVUFBVSxFQUFFQyxLQUFLO0lBQzFDLElBQU1DLHVCQUF1QixHQUFHZiwyQkFBMkIsQ0FBQ00sS0FBSyxDQUFDUSxLQUFLLENBQUM7SUFFeEUsSUFBSSxDQUFDQyx1QkFBdUIsSUFBSSxDQUFDdkIsa0JBQVUsQ0FBQ3FCLFVBQVUsQ0FBQ0csUUFBUSxFQUFFRCx1QkFBdUIsQ0FBQ3JCLFdBQVcsQ0FBQyxFQUFFO01BRW5HTyxNQUFNLENBQUNRLElBQUksQ0FBQyxxQkFBa0JLLEtBQUssR0FBRyxDQUFDLHdCQUFpQmYsY0FBYyxDQUFDVyxLQUFLLHNCQUFlRyxVQUFVLENBQUNHLFFBQVEsOENBQXdDQyxrQ0FBZ0IsQ0FBQ2xCLGNBQWMsQ0FBQ08sS0FBSyxFQUFFUSxLQUFLLENBQUcsQ0FBQzs7RUFFOU0sQ0FBQyxDQUFDO0VBRUYsSUFBSWIsTUFBTSxDQUFDSSxNQUFNLEVBQUU7SUFDZixNQUFNLElBQUlhLEtBQUssQ0FBQ2pCLE1BQU0sQ0FBQ2tCLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQzs7QUFFNUMsQ0FBQyIsIm5hbWVzIjpbImV4cG9ydHMiLCJzdGVwRnJvbUZlYXR1cmVGaWxlIiwic3RlcE1hdGNoZXIiLCJ0b0xvY2FsZUxvd2VyQ2FzZSIsIlJlZ0V4cCIsIm1hdGNoIiwib3B0aW9ucyIsInBhcnNlZFNjZW5hcmlvIiwic2NlbmFyaW9Gcm9tU3RlcERlZmluaXRpb25zIiwiZXJyb3JzIiwicGFyc2VkU2NlbmFyaW9TdGVwcyIsInNjZW5hcmlvcyIsInBhcnNlZFNjZW5hcmlvT3V0bGluZVNjZW5hcmlvcyIsImxlbmd0aCIsInN0ZXBzIiwicGFyc2VkU3RlcENvdW50Iiwic3RlcERlZmluaXRpb25Db3VudCIsInB1c2giLCJ0aXRsZSIsInNjZW5hcmlvX2dlbmVyYXRpb25fMSIsImZvckVhY2giLCJwYXJzZWRTdGVwIiwiaW5kZXgiLCJzdGVwRnJvbVN0ZXBEZWZpbml0aW9ucyIsInN0ZXBUZXh0Iiwic3RlcF9nZW5lcmF0aW9uXzEiLCJFcnJvciIsImpvaW4iXSwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vc3JjL3ZhbGlkYXRpb24vc3RlcC1kZWZpbml0aW9uLXZhbGlkYXRpb24udHMiXSwic291cmNlc0NvbnRlbnQiOltudWxsXX0=

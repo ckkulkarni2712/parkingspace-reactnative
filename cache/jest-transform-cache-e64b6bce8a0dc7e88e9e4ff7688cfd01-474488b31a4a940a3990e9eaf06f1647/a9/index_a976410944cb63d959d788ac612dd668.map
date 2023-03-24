@@ -1,0 +1,1 @@
+{"version":3,"names":["module","exports","require"],"sources":["index.js"],"sourcesContent":["'use strict';\n\nmodule.exports = require('./cjs/react-shallow-renderer.js');\n"],"mappings":"AAAA,YAAY;;AAEZA,MAAM,CAACC,OAAO,GAAGC,OAAO,CAAC,iCAAiC,CAAC"}

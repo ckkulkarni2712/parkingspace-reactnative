@@ -2,12 +2,16 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, Button} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useDispatch} from 'react-redux';
+import {initializeParkingLot} from './Reducer/parkingSlice';
 
 export default function Base() {
   const [numspaces, setNumSpaces] = useState('');
+  const dispatch = useDispatch();
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const handleInputChange = (numspaces: string) => {
     setNumSpaces(numspaces);
+    dispatch(initializeParkingLot(numspaces));
   };
 
   return (

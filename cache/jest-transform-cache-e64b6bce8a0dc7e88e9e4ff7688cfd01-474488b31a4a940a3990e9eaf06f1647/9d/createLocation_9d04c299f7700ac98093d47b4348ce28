@@ -1,0 +1,19 @@
+4543ff7a1731c93593e99855ad5136b6
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var cucumber_messages_1 = require("cucumber-messages");
+function createLocation(props) {
+  var location = cucumber_messages_1.messages.Location.create(props);
+  if (location.line === 0) {
+    location.line = undefined;
+  }
+  if (location.column === 0) {
+    location.column = undefined;
+  }
+  return location;
+}
+exports.default = createLocation;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQTtBQUVBLFNBQXdCQSxjQUFjLENBQUNDLEtBR3RDO0VBQ0MsSUFBTUMsUUFBUSxHQUFHQyw0QkFBUSxDQUFDQyxRQUFRLENBQUNDLE1BQU0sQ0FBQ0osS0FBSyxDQUFDO0VBQ2hELElBQUlDLFFBQVEsQ0FBQ0ksSUFBSSxLQUFLLENBQUMsRUFBRTtJQUN2QkosUUFBUSxDQUFDSSxJQUFJLEdBQUdDLFNBQVM7O0VBRTNCLElBQUlMLFFBQVEsQ0FBQ00sTUFBTSxLQUFLLENBQUMsRUFBRTtJQUN6Qk4sUUFBUSxDQUFDTSxNQUFNLEdBQUdELFNBQVM7O0VBRzdCLE9BQU9MLFFBQVE7QUFDakI7QUFiQU8iLCJuYW1lcyI6WyJjcmVhdGVMb2NhdGlvbiIsInByb3BzIiwibG9jYXRpb24iLCJjdWN1bWJlcl9tZXNzYWdlc18xIiwiTG9jYXRpb24iLCJjcmVhdGUiLCJsaW5lIiwidW5kZWZpbmVkIiwiY29sdW1uIiwiZXhwb3J0cyJdLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvY2xpL2NyZWF0ZUxvY2F0aW9uLnRzIl0sInNvdXJjZXNDb250ZW50IjpbbnVsbF19
